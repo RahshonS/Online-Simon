@@ -1,4 +1,5 @@
-console.log("Hello");
+console.log("Hello and welcome to Online Simon");
+console.log(' ');
 
 const light = ['red', 'yellow', 'blue', 'green'];
 
@@ -17,11 +18,13 @@ for(let n = 0; n < 5; n++){
     ranArray[n] = ranNum;
 }
 
-console.log("Rand Array: " + ranArray);
+//console.log("Rand Array: " + ranArray);
 
 for(let i = 0; i < maxLevel; i++){
     let currLevel = i + 1;
     console.log("LEVEL:" + currLevel);
+
+    let newestLight;                //Will keep track of the most recent light added to the sequence. Use later to match to the users guess
 
 
     for(let k = 0; k <= i; k++){
@@ -35,8 +38,29 @@ for(let i = 0; i < maxLevel; i++){
         let colorToTrigger = light[currLight];
 
         console.log(colorToTrigger);
+
+        newestLight = colorToTrigger;
+
     }
+
+    
+    console.log('NEWEST LIGHT IN SEQUENCE: ' + newestLight);
+
+    let userGuess = prompt('What light was added to the sequence during this level? ');
+    let correctAnswer = newestLight;
+
+    if(userGuess == correctAnswer){
+        console.log('Correct!');
+    }
+    else if(userGuess != correctAnswer){
+        console.log('Sorry. Thank is incorrect. Game Over.');
+    }
+    
+    console.log(' ');
 }
+
+
+
 
 
 function genRandomNum(){
