@@ -1,30 +1,24 @@
 console.log("Hello and welcome to Online Simon");
 console.log(' ');
 
-const light = ['red', 'yellow', 'blue', 'green'];
+
 
 //Full sequence should yield ---> red , blue , green, yellow, blue 
 //Goal: 0 --> 0 , 2 --> 0, 2, 3 ---> 
-let testArray = [0,2,3,1,2];
+//let testArray = [0,2,3,1,2];
 
-let maxLevel = 5;
 
-//let arrSize = 5;
-let ranArray= [];
-
-//console.log("Array length " + ranArray.length);
-for(let n = 0; n < 5; n++){
-    let ranNum = genRandomNum();
-    ranArray[n] = ranNum;
-}
 
 //console.log("Rand Array: " + ranArray);
 
-for(let i = 0; i < maxLevel; i++){
-    let currLevel = i + 1;
-    console.log("LEVEL:" + currLevel);
 
-    let newestLight;                //Will keep track of the most recent light added to the sequence. Use later to match to the users guess
+function beginGame(){
+    //GAME LOGIC
+    for(let i = 0; i < maxLevel; i++){
+        let currLevel = i + 1;
+        console.log("LEVEL:" + currLevel);
+
+        let newestLight;                //Will keep track of the most recent light added to the sequence. Use later to match to the users guess
 
 
     for(let k = 0; k <= i; k++){
@@ -40,12 +34,46 @@ for(let i = 0; i < maxLevel; i++){
         console.log(colorToTrigger);
 
         newestLight = colorToTrigger;
-
-    }
+     }
 
     
     console.log('NEWEST LIGHT IN SEQUENCE: ' + newestLight);
 
+    //call questionUser
+
+    
+    console.log(' ');
+}
+}
+
+
+function setupGame(){
+    console.log('Sup');
+
+    const light = ['red', 'yellow', 'blue', 'green'];
+
+    let maxLevel = 5;
+
+    //let arrSize = 5;
+    let ranArray= [];
+
+    //console.log("Array length " + ranArray.length);
+    for(let n = 0; n < 5; n++){
+        let ranNum = genRandomNum();
+        ranArray[n] = ranNum;
+    }
+
+    //Call beginGame
+}
+
+
+function resetGame(){
+    console.log('Game has been reset');
+    //Call setupGame
+}
+
+
+function questionUser(){
     let userGuess = prompt('What light was added to the sequence during this level? ');
     let correctAnswer = newestLight;
 
@@ -53,14 +81,12 @@ for(let i = 0; i < maxLevel; i++){
         console.log('Correct!');
     }
     else if(userGuess != correctAnswer){
-        console.log('Sorry. Thank is incorrect. Game Over.');
+        console.log('Sorry. That is incorrect');
+        console.log(correctAnswer + ' was the correct answer');
+        console.log('Game Over.');
+        //call setup game
     }
-    
-    console.log(' ');
 }
-
-
-
 
 
 function genRandomNum(){
