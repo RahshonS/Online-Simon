@@ -1,3 +1,5 @@
+
+
 console.log("Hello and welcome to Online Simon");
 console.log(' ');
 
@@ -61,7 +63,8 @@ function beginGame(ranArray){
     console.log('NEWEST LIGHT IN SEQUENCE: ' + newestLight);
 
     //call questionUser
-    questionUser(newestLight);
+    let timeoutID = setTimeout(questionUser(newestLight), 15000000);
+    
     
 
     
@@ -72,8 +75,13 @@ function beginGame(ranArray){
 
 
 function questionUser(newestLight){
+    //Call timer Here?
+    
+
     let userGuess = prompt('What light was added to the sequence during this level? ');
     let correctAnswer = newestLight;
+
+    let timeoutID = setTimeout(resetGame(), 100000);
 
     if(userGuess == correctAnswer){
         console.log('Correct!');
@@ -84,12 +92,14 @@ function questionUser(newestLight){
         console.log('Game Over.');
         //call setup game
     }
+
+    clearTimeout(resetGame());
 }
 
 
 function resetGame(){
     console.log('Game has been reset');
-    //Call setupGame
+    let timeoutID2 = (setupGame(), 550000);
 }
 
 
