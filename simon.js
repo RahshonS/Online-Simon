@@ -5,11 +5,29 @@ console.log(' ');
 
 const light = ['red', 'yellow', 'blue', 'green'];
 
+const btnRed = document.getElementById('red-btn');
+const btnYellow = document.getElementById('yellow-btn');
+const btnGreen = document.getElementById('green-btn');
+const btnBlue = document.getElementById('blue-btn');
+
 let maxLevel = 5;
 
-//Full sequence should yield ---> red , blue , green, yellow, blue 
-//Goal: 0 --> 0 , 2 --> 0, 2, 3 ---> 
-//let testArray = [0,2,3,1,2];
+
+btnRed.addEventListener('click', ()=> {
+    console.log('Red button clicked');
+});
+
+btnYellow.addEventListener('click', ()=> {
+    console.log('Yellow button clicked');
+});
+
+btnGreen.addEventListener('click', ()=> {
+    console.log('Green button clicked');
+});
+
+btnBlue.addEventListener('click', ()=> {
+    console.log('Blue button clicked');
+});
 
 
 
@@ -63,7 +81,7 @@ function beginGame(ranArray){
     console.log('NEWEST LIGHT IN SEQUENCE: ' + newestLight);
 
     //call questionUser
-    let timeoutID = setTimeout(questionUser(newestLight), 15000000);
+    //let timeoutID = setTimeout(questionUser(newestLight), 15000000);
     
     
 
