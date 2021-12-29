@@ -30,6 +30,20 @@ btnBlue.addEventListener('click', ()=> {
 });
 
 
+//PROMISE: Create a promise that ensures that a button will be pressed by the player in the future 
+/*
+const btnPressed = new Promise((resolve, reject) => {
+    //If button is pressed by player resolve (promise fulfilled)
+    //If a button is not pressed by the player reject (promised not fulfilled)
+})
+
+btnPressed.then((doThing) => {
+    //Handle / Expand upon resolve (success)
+}).catch((doThing) => {
+    //Error occurred.. Handle Rejection 
+})
+*/
+
 
 setupGame();
 
@@ -81,8 +95,8 @@ function beginGame(ranArray){
     console.log('NEWEST LIGHT IN SEQUENCE: ' + newestLight);
 
     //call questionUser
-    //let timeoutID = setTimeout(questionUser(newestLight), 15000000);
-    
+    //let timeoutID = setTimeout(questionUser(newestLight), (1000 * 120));
+    setTimeout(() => {questionUser(newestLight)}, (1000 * 120));
     
 
     
@@ -111,11 +125,11 @@ function questionUser(newestLight){
         //call setup game
     }
 
-    clearTimeout(resetGame());
+    clearTimeout(restartGame());
 }
 
 
-function resetGame(){
+function restartGame(){
     console.log('Game has been reset');
     let timeoutID2 = (setupGame(), 550000);
 }
