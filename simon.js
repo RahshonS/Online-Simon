@@ -121,7 +121,7 @@ function questionUser(newestLight){
     let userGuess = prompt('What light was added to the sequence during this level? ');
     while(userGuess != newestLight){
         console.log('Nope. Guess again');
-        let userGuess = prompt('What light was added to the sequence during this level? ');
+        userGuess = prompt('What light was added to the sequence during this level? ');
     }
 
     let correctAnswer = newestLight;
