@@ -33,10 +33,16 @@ btnBlue.addEventListener('click', ()=> {
 //PROMISE: Create a promise that ensures that a button will be pressed by the player in the future 
 /*
 const btnPressed = new Promise((resolve, reject) => {
-    //If button is pressed by player resolve (promise fulfilled)
-    //If a button is not pressed by the player reject (promised not fulfilled)
+    //If( button is pressed by player (promise fulfilled)){
+        resolve('Promise Fulfilled');
+    }
+    else{
+        //If a button is not pressed by the player reject (promised not fulfilled)
+        reject('Error Occurred')
+    }
 })
 
+//Handle the outcome of a promise 
 btnPressed.then((doThing) => {
     //Handle / Expand upon resolve (success)
 }).catch((doThing) => {
@@ -96,9 +102,11 @@ function beginGame(ranArray){
 
     //call questionUser
     //let timeoutID = setTimeout(questionUser(newestLight), (1000 * 120));
-    setTimeout(() => {questionUser(newestLight)}, (1000 * 120));
-    
 
+    //THE TIMEOUT THAT WORKS
+    //setTimeout(() => {questionUser(newestLight)}, (1000 * 120));
+    
+    questionUser(newestLight);
     
     console.log(' ');
 }
@@ -111,9 +119,14 @@ function questionUser(newestLight){
     
 
     let userGuess = prompt('What light was added to the sequence during this level? ');
+    while(userGuess != newestLight){
+        console.log('Nope. Guess again');
+        let userGuess = prompt('What light was added to the sequence during this level? ');
+    }
+
     let correctAnswer = newestLight;
 
-    let timeoutID = setTimeout(resetGame(), 100000);
+    //let timeoutID = setTimeout(resetGame(), 100000);
 
     if(userGuess == correctAnswer){
         console.log('Correct!');
@@ -125,7 +138,7 @@ function questionUser(newestLight){
         //call setup game
     }
 
-    clearTimeout(restartGame());
+    //clearTimeout(restartGame());
 }
 
 
