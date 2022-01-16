@@ -4,6 +4,7 @@ console.log("Let's Play Memory Blocks");
 console.log(' ');
 
 const light = ['red', 'yellow', 'blue', 'green'];
+let ranArray= [];
 
 const btnRed = document.getElementById('red-btn');
 const btnYellow = document.getElementById('yellow-btn');
@@ -12,7 +13,7 @@ const btnBlue = document.getElementById('blue-btn');
 
 let maxLevel = 5;
 
-
+/*
 btnRed.addEventListener('click', ()=> {
     console.log('Red button clicked');
 });
@@ -25,7 +26,7 @@ btnGreen.addEventListener('click', ()=> {
     console.log('Green button clicked');
 });
 
-/*
+
 btnBlue.addEventListener('click', ()=> {
     console.log('Blue button clicked');
 });
@@ -56,11 +57,11 @@ btnPressed.then((doThing) => {
 setupGame();
 
 function setupGame(){
-    console.log('Sup');
+    //console.log('Sup');
 
 
     //let arrSize = 5;
-    let ranArray= [];
+    //let ranArray= [];
 
     //console.log("Array length " + ranArray.length);
     for(let n = 0; n < 5; n++){
@@ -77,9 +78,10 @@ function setupGame(){
 
 
 function beginGame(ranArray){
+    let currLevel;
     //GAME LOGIC
     for(let i = 0; i < maxLevel; i++){
-        let currLevel = i + 1;
+        currLevel = i + 1;
         console.log("LEVEL:" + currLevel);
 
         let newestLight;                //Will keep track of the most recent light added to the sequence. Use later to match to the users guess
@@ -109,12 +111,60 @@ function beginGame(ranArray){
     //let timer = setTimeout(gameOver, 30000);
     
     //--- COMMENT THIS OUT TO STOP A LOOP / PROMPT ON LOAD --- 
-    questionUser(newestLight);
+    //questionUser(newestLight);
+
+    userInput(currLevel);
     
     console.log(' ');
 }
 }
 
+
+//Responsible for monitoring user button clicks 
+//A timer is started that threatens to restart the game 
+//Each button click cancels that timer
+//Check if the right button was pressed after each click from the user so curr lvl must be known
+function userInput(currLevel){
+    //THE TIMEOUT THAT WORKS
+    //let timer = setTimeout(gameOver, 30000);
+    let userChoice;
+    let i = 0;
+    let correctSeq = false;
+    let numCorrect = 0;
+
+    while(numCorrect != currLevel){
+        btnRed.addEventListener('click', ()=> {
+            console.log('Red button clicked');
+            userChoice = 0;
+        });
+        
+        btnYellow.addEventListener('click', ()=> {
+            console.log('Yellow button clicked');
+            userChoice = 1;
+        });
+        
+        btnGreen.addEventListener('click', ()=> {
+            console.log('Green button clicked');
+            userChoice = 2;
+        });
+    
+        btnBlue.addEventListener('click', ()=> {
+            console.log('Green button clicked');
+            clearTimeout(timer);
+            console.log('Timer reset');
+            userChoice = 3;
+        });
+    
+        //while correctSeq != true 
+        if(userChoice == ranArray[i]){
+            //clearTimeout(fcn that resets game)
+            numCorrect++;
+        }
+    
+        i++;
+    }
+    
+}
 
 
 function questionUser(newestLight){
