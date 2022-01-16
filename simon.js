@@ -1,6 +1,6 @@
 
 
-console.log("Hello and welcome to Online Simon");
+console.log("Let's Play Memory Blocks");
 console.log(' ');
 
 const light = ['red', 'yellow', 'blue', 'green'];
@@ -25,9 +25,11 @@ btnGreen.addEventListener('click', ()=> {
     console.log('Green button clicked');
 });
 
+/*
 btnBlue.addEventListener('click', ()=> {
     console.log('Blue button clicked');
 });
+*/
 
 
 //PROMISE: Create a promise that ensures that a button will be pressed by the player in the future 
@@ -104,8 +106,9 @@ function beginGame(ranArray){
     //let timeoutID = setTimeout(questionUser(newestLight), (1000 * 120));
 
     //THE TIMEOUT THAT WORKS
-    //setTimeout(() => {questionUser(newestLight)}, (1000 * 120));
+    //let timer = setTimeout(gameOver, 30000);
     
+    //--- COMMENT THIS OUT TO STOP A LOOP / PROMPT ON LOAD --- 
     questionUser(newestLight);
     
     console.log(' ');
@@ -116,35 +119,66 @@ function beginGame(ranArray){
 
 function questionUser(newestLight){
     //Call timer Here?
+
+    //let userGuess = prompt('What light was added to the sequence during this level? ');
+
+    //THE TIMEOUT THAT WORKS
+    let timer = setTimeout(gameOver, 30000);
+
+    btnBlue.addEventListener('click', ()=> {
+        clearTimeout(timer);
+        console.log('Timer reset');
+    });
+
     
 
-    let userGuess = prompt('What light was added to the sequence during this level? ');
+    /*
     while(userGuess != newestLight){
+        
+
         console.log('Nope. Guess again');
-        userGuess = prompt('What light was added to the sequence during this level? ');
+        userGuess = prompt('What light was added to the sequence during this level? ');   
     }
+    */
 
     let correctAnswer = newestLight;
 
     //let timeoutID = setTimeout(resetGame(), 100000);
 
+    /*
     if(userGuess == correctAnswer){
         console.log('Correct!');
+        //Cancel call to game over
+        clearTimeout(timer);
     }
     else if(userGuess != correctAnswer){
         console.log('Sorry. That is incorrect');
-        console.log(correctAnswer + ' was the correct answer');
-        console.log('Game Over.');
+        console.log('The correct answer was ' + correctAnswer);
         //call setup game
+        gameOver();
     }
+    */
 
     //clearTimeout(restartGame());
 }
 
 
+function checkAnswer(){
+    //Check to see if the user has chosen the correct answer 
+    //if they have.. continue ?
+    //if not ask again by calling question user ? 
+}
+
+function gameOver(){
+    console.log('Game over man');
+    console.log(' ');
+    setupGame();
+}
+
+
 function restartGame(){
     console.log('Game has been reset');
-    let timeoutID2 = (setupGame(), 550000);
+    let timeoutID2 = (setupGame(), 5000);
 }
 
 
