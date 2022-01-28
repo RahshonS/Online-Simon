@@ -123,7 +123,7 @@ function beginGame(ranArray){
     //userInput(currLevel);
 
     //Requires prompts from the user in order to progress from level to level 
-    userInput2(currLevel, newestLight);
+    userInput2(currLevel);
     
     console.log(' ');
 }
@@ -212,81 +212,52 @@ function userInput(currLevel){
 }
 
 //Param (currLevel): current level for current level = the amount of guesses needed from the user 
-//Param()
+//Param (newestLight): Serves as the string the user needs to guess correctly in order to get the prompt right and continue the game
 function userInput2(currLevel){
     //console.log("LEVEL:" + currLevel);
 
     //THE TIMEOUT THAT WORKS
     //let timer = setTimeout(gameOver, 30000);
-    let userChoice;
-    let i = 0;
     let correctSeq = false;
     let numCorrect = 0;
+    let currLight = 0;
 
     //This loop stops the levels from progessing but causes an infinte loop 
     //T && T = enter Loop
-    while((correctSeq != true) && (numCorrect < currLevel)){
-        console.log('in loop');
+    while((correctSeq != true)){
+        console.log('In loop');
+        //let currLight = 0;
+        let pos = ranArray[currLight];          //grabs a number from random array 
+        let light2Guess = light[pos];
 
-        userGuess = prompt('What light was added to the sequence during this level? ');  
-        if(userGuess == 'red'){
+
+        console.log('curr light: ' + currLight);
+        console.log('answer will be: ' + light2Guess);
+        let userGuess = prompt('What light was added to the sequence during this level? ');
+        if(userGuess == light2Guess){
             numCorrect++;
         }
+        else{
+            console.log('nah');
+            while(userGuess != light2Guess){
+                console.log('Correct answer: ' + light2Guess);
+                userGuess = prompt('What light was added to the sequence during this level? ');
+                if(userGuess == light2Guess){
+                    numCorrect++;
+                }
+            }
+        }
 
+        
         if(numCorrect == currLevel){
             correctSeq = true;
         }
-
-
-        btnRed.addEventListener('click', ()=> {
-            console.log('Red button clicked');
-            userChoice = 0;
-             //while correctSeq != true 
-            if(userChoice == ranArray[i]){
-                //clearTimeout(fcn that resets game)
-                console.log('correct');
-                numCorrect++;
-            }
-        });
-        
-        btnYellow.addEventListener('click', ()=> {
-            console.log('Yellow button clicked');
-            userChoice = 1;
-            if(userChoice == ranArray[i]){
-                //clearTimeout(fcn that resets game)
-                console.log('correct');
-                numCorrect++;
-            }
-        });
-
-        btnBlue.addEventListener('click', ()=> {
-            console.log('Blue button clicked');
-            //clearTimeout(timer);
-            console.log('Timer reset');
-            userChoice = 2;
-            if(userChoice == ranArray[i]){
-                //clearTimeout(fcn that resets game)
-                console.log('correct');
-                numCorrect++;
-            }
-        });
-        
-        btnGreen.addEventListener('click', ()=> {
-            console.log('Green button clicked');
-            userChoice = 3;
-            if(userChoice == ranArray[i]){
-                //clearTimeout(fcn that resets game)
-                console.log('correct');
-                numCorrect++;
-            }
-        });
     
-        i++;
-        
-        if(numCorrect == currLevel){
-            correctSeq = true;
-        }
+        currLight++;
     }
+
+    currLight *= 0;
+        
     
 }
 
