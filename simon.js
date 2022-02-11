@@ -1,9 +1,10 @@
 
 
+
 console.log("Let's Play Memory Blocks");
 console.log(' ');
 
-const light = ['red', 'yellow', 'blue', 'green'];
+const light = ['red', 'yellow', 'green', 'blue'];
 let ranArray= [];
 
 const btnRed = document.getElementById('red-btn');
@@ -13,6 +14,7 @@ const btnBlue = document.getElementById('blue-btn');
 
 let maxLevel = 5;
 
+//BUTTON CODE
 /*
 btnRed.addEventListener('click', ()=> {
     console.log('Red button clicked');
@@ -33,24 +35,40 @@ btnBlue.addEventListener('click', ()=> {
 */
 
 
+//to call
+//await buttonPress()
+
+
 //PROMISE: Create a promise that ensures that a button will be pressed by the player in the future 
 /*
-const btnPressed = new Promise((resolve, reject) => {
-    //If( button is pressed by player (promise fulfilled)){
-        resolve('Promise Fulfilled');
-    }
-    else{
-        //If a button is not pressed by the player reject (promised not fulfilled)
-        reject('Error Occurred')
-    }
-})
+let _btnPress;
 
-//Handle the outcome of a promise 
-btnPressed.then((doThing) => {
-    //Handle / Expand upon resolve (success)
-}).catch((doThing) => {
-    //Error occurred.. Handle Rejection 
-})
+async function buttonPress(){
+
+    let buttonPress = new promises((resolve, reject) => {
+        //promise definition 
+        //... 
+
+
+        //handlers: Resolve (if) else (reject)
+        let press = true;
+        if(press){
+            //resolve
+            console.log("btn pressed");
+        }
+        else{
+            //reject()
+            console.log("No press");
+        }
+    })
+    
+    
+    buttonPress.then(() => {
+
+    }).catch(() => {
+
+    })
+}
 */
 
 
@@ -66,7 +84,7 @@ function setupGame(){
     //console.log("Array length " + ranArray.length);
     for(let n = 0; n < 5; n++){
         let ranNum = genRandomNum();
-        ranArray[n] = ranNum;
+        ranArray[n] = ranNum;                                       //Array of random numbers
     }
 
     //ARRAY in NUMS
@@ -79,7 +97,7 @@ function setupGame(){
 
 
 
-function beginGame(ranArray){
+async function beginGame(ranArray){
     let currLevel;
     //GAME LOGIC
     for(let i = 0; i < maxLevel; i++){
@@ -94,7 +112,7 @@ function beginGame(ranArray){
             //make sure we stay within the test array bounds
         
             currLight = ranArray[k];
-            //console.log("Test Array Num is: " + currLight);
+            //console.log("ranArray Num is: " + currLight);
 
             //Plug the number (currLight) into the light array to trigger the appropriate light
             let colorToTrigger = light[currLight];
@@ -120,96 +138,142 @@ function beginGame(ranArray){
     
 
     //Requires button inputs from the user in order to progress through the game
-    //userInput(currLevel);
+    //?? await userInput(currLevel); 
+    await userInput(currLevel);
 
     //Requires prompts from the user in order to progress from level to level 
-    userInput2(currLevel);
+    //userInput2(currLevel);
+
+    //userInput3(currLevel);
     
     console.log(' ');
 }
 }
 
 
-//Responsible for monitoring user button clicks 
-//A timer is started that threatens to restart the game 
-//Each button click cancels that timer
-//Check if the right button was pressed after each click from the user so curr lvl must be known
-function userInput(currLevel){
-    //console.log("LEVEL:" + currLevel);
+let userChoice;
+let selection;
 
-    //THE TIMEOUT THAT WORKS
-    //let timer = setTimeout(gameOver, 30000);
-    let userChoice;
-    let i = 0;
-    let correctSeq = false;
-    let numCorrect = 0;
+async function userInput(currLevel){
+    
+    let answer = ranArray[0];
+    //let selection;
+    let userClick = false;
 
-    //This loop stops the levels from progessing but causes an infinte loop 
-    //T && T = enter Loop
-    while((correctSeq != true) && (numCorrect < currLevel)){
-        console.log('in loop');
+    console.log('Awaiting user input');
 
-        userGuess = prompt('What light was added to the sequence during this level? ');  
-        if(userGuess == 'red'){
-            numCorrect++;
+    
+    let prom = await new Promise((resolve, reject) => {
+
+        //userChoice = resolve;
+        
+        let pick = btnSelection();    
+        //btnSelection();
+
+        if(answer == pick){
+            //console.log('Res');
+            resolve(console.log('Correct!'));
+            //userChoice = resolve();
+        }
+        else if(pick == 6){
+            //console.log('rejjie');
+            reject('rej');
+        }
+            
+
+    });
+
+    prom
+    .then((msg) => {
+        console.log('then' + msg)
+    })
+    .catch((msg) => {
+        console.log('catch' + msg)
+    });
+
+}
+
+//This function will ensure that the right button is selected by the user 
+async function userInput3(currLevel){
+    
+    console.log('User input 3 awaiting.. ')
+
+    let userAction = false;
+
+    while(userAction != true){
+        let i = 0;
+        while(i <= 10){
+            i++;
         }
 
-        if(numCorrect == currLevel){
-            correctSeq = true;
+        if(i = 10){
+            userAction = true;
         }
+    }
 
+}
+
+function btnSelection(){
+
+    /*
+    let correctGuesses = 0;
+    let selection;
+    let pos = 0;
+    let answer = ranArray[pos];
+    let test = 0;
+    let userClick = false;
+    */
 
         btnRed.addEventListener('click', ()=> {
             console.log('Red button clicked');
-            userChoice = 0;
-             //while correctSeq != true 
-            if(userChoice == ranArray[i]){
-                //clearTimeout(fcn that resets game)
-                console.log('correct');
-                numCorrect++;
-            }
+            //selection = 0;
+            //userClick = true;
+            //console.log('selection = ' + selection);
+            return 0;
+    
         });
         
         btnYellow.addEventListener('click', ()=> {
             console.log('Yellow button clicked');
-            userChoice = 1;
-            if(userChoice == ranArray[i]){
-                //clearTimeout(fcn that resets game)
-                console.log('correct');
-                numCorrect++;
-            }
-        });
-
-        btnBlue.addEventListener('click', ()=> {
-            console.log('Blue button clicked');
-            //clearTimeout(timer);
-            console.log('Timer reset');
-            userChoice = 2;
-            if(userChoice == ranArray[i]){
-                //clearTimeout(fcn that resets game)
-                console.log('correct');
-                numCorrect++;
-            }
+            //selection = 1;
+            //userClick = true;
+            //console.log('selection = ' + selection);
+            return 1;
         });
         
         btnGreen.addEventListener('click', ()=> {
             console.log('Green button clicked');
-            userChoice = 3;
-            if(userChoice == ranArray[i]){
-                //clearTimeout(fcn that resets game)
-                console.log('correct');
-                numCorrect++;
-            }
+            //selection = 2;
+            //userClick = true;
+            //console.log('selection = ' + selection);
+            return 2;
+        });
+        
+        
+        btnBlue.addEventListener('click', ()=> {
+            console.log('Blue button clicked');
+            selection = 3;
+            //userClick = true;
+            console.log('selection = ' + selection);
+            return 3;
         });
     
-        i++;
-        
-        if(numCorrect == currLevel){
-            correctSeq = true;
+        /*
+        if(selection == answer){
+            pos++;
+            correctGuesses++;
+            console.log('You guessed correctly');
         }
-    }
-    
+        else{
+            console.log('nope');
+        }
+        */
+
+        //test++;
 }
+    
+
+
 
 //Param (currLevel): current level for current level = the amount of guesses needed from the user 
 //Param (newestLight): Serves as the string the user needs to guess correctly in order to get the prompt right and continue the game
@@ -257,7 +321,7 @@ function userInput2(currLevel){
     }
 
     currLight *= 0;
-        
+
     
 }
 
@@ -326,7 +390,7 @@ function restartGame(){
     let timeoutID2 = (setupGame(), 5000);
 }
 
-
+//Generate a random number between 0 - 3 (inclusive)
 function genRandomNum(){
     let ranNum = Math.random();
     ranNum = (ranNum * 10);
